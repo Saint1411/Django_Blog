@@ -1,0 +1,21 @@
+{% extends "blog/layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {% if user.first_name and user.last_name %}
+                    <legend class="border-bottom mb-4">{{ user.last_name }}, What on your mind?</legend>
+                {% else %}
+                    <legend class="border-bottom mb-4">{{ user.username }}, What on your mind?</legend>
+                {% endif %}
+                {{ form.media }}
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
